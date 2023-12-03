@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqgf2ujr7gcy"]
+
+[ext_resource type="Texture2D" uid="uid://b1t5npx3d8gpm" path="res://Levels/StartingForest/forest-bg.jpg" id="1_feggf"]
+
+[node name="Root" type="Node2D"]
+
+[node name="Forest-bg" type="Sprite2D" parent="."]
+scale = Vector2(0.673675, 0.673675)
+texture = ExtResource("1_feggf")
+centered = false
