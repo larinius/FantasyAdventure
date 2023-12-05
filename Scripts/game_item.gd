@@ -5,12 +5,17 @@ const SILVER2COPPER = 60		# Silver coin value ~83
 const GOLD2COPPER = 24 * 60 	# Gold coin value ~2000
 
 class Item:
+	var id : int
+	var name : String
 	var price : float
 	var weight : float
 		
 	func _init():
+		id = Utils.unique_item_id()
 		price = 0.0
 		weight = 0.0
+		name = ""
+		GameState.world_items.append(self)
 	
 class Weapon extends Item:
 	func _init():
@@ -60,3 +65,34 @@ class Club extends Weapon:
 		super._init()
 		weight = 3.0
 		price = 10.0
+
+class Herb extends Item:
+	func _init():
+		super._init()
+		
+class Drop extends Item:
+	func _init():
+		super._init()
+		
+
+class CraftMaterial extends Item:
+	func _init():
+		super._init()
+
+class Ore extends CraftMaterial:
+	func _init():
+		super._init()
+
+class Wood extends CraftMaterial:
+	func _init():
+		super._init()
+
+class MonsterPart extends CraftMaterial:
+	func _init():
+		super._init()
+
+class Potion extends Item:
+	func _init():
+		super._init()
+		price = 60
+		weight = 0.1

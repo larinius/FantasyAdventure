@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://8op1u74kho5"]
+
+[ext_resource type="Script" path="res://Items/Mushrooms/Mushroom.gd" id="1_et1g7"]
+[ext_resource type="Texture2D" uid="uid://b5utf13yvgxcc" path="res://Items/Mushrooms/mushroom.png" id="2_64jf0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flpth"]
+size = Vector2(34, 46)
+
+[node name="Mushroom" type="Area2D" groups=["Items"]]
+script = ExtResource("1_et1g7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -23)
+shape = SubResource("RectangleShape2D_flpth")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -23)
+rotation = -0.042091
+scale = Vector2(0.117065, 0.117065)
+texture = ExtResource("2_64jf0")

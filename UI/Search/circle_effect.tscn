@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://frnu53fyfmdh"]
+
+[ext_resource type="Texture2D" uid="uid://d23sppfdyffyc" path="res://Assets/Effects/Golden circle effect.png" id="1_2lynp"]
+[ext_resource type="Script" path="res://UI/Search/circle_effect.gd" id="2_bo4gg"]
+
+[sub_resource type="Animation" id="Animation_kc8a1"]
+resource_name = "Expand"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(0.366022, 0.267943, 2.2974),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(0.25, 0.25), Vector2(0.01, 0.01)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2k4ag"]
+_data = {
+"Expand": SubResource("Animation_kc8a1")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7m3j2"]
+radius = 463.47
+
+[node name="Effect" type="Sprite2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_2lynp")
+script = ExtResource("2_bo4gg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2k4ag")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_7m3j2")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 GameState="*res://Scripts/game_state.gd"
 GameItem="res://Scripts/game_item.gd"
+Utils="*res://Scripts/utils.gd"
+GameController="*res://Scripts/game_controller.gd"
 
 [display]
 

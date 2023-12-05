@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqgf2ujr7gcy"]
+
+[ext_resource type="Texture2D" uid="uid://b1t5npx3d8gpm" path="res://Levels/StartingForest/forest-bg.jpg" id="1_feggf"]
+[ext_resource type="Texture2D" uid="uid://dugxkqxppbtq6" path="res://Assets/Placeholder/dummy_box.png" id="2_v1fph"]
+[ext_resource type="Texture2D" uid="uid://brk6q8uqfx576" path="res://Assets/Icons/magnifying-glass.png" id="3_mojkj"]
+[ext_resource type="Texture2D" uid="uid://d23sppfdyffyc" path="res://Assets/Effects/Golden circle effect.png" id="4_ej1ai"]
+[ext_resource type="Script" path="res://Levels/StartingForest/SearchButton.gd" id="4_xnhtk"]
+
+[sub_resource type="Animation" id="Animation_iy3r4"]
+resource_name = "SearchCircleExpand"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/SearchButton/GoldenCircleEffect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1.62451, 3.605),
+"update": 0,
+"values": [Vector2(0.05, 0.05), Vector2(1.135, 1.135), Vector2(0.05, 0.05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tktan"]
+_data = {
+"SearchCircleExpand": SubResource("Animation_iy3r4")
+}
+
+[node name="Root" type="Node2D"]
+
+[node name="Forest-bg" type="Sprite2D" parent="."]
+scale = Vector2(0.673675, 0.673675)
+texture = ExtResource("1_feggf")
+centered = false
+
+[node name="Loot" type="TextureButton" parent="."]
+offset_left = 878.0
+offset_top = 482.0
+offset_right = 1128.0
+offset_bottom = 732.0
+scale = Vector2(0.404, 0.404)
+texture_normal = ExtResource("2_v1fph")
+
+[node name="Sword" type="TextureButton" parent="."]
+offset_left = 690.0
+offset_top = 418.0
+offset_right = 940.0
+offset_bottom = 668.0
+scale = Vector2(0.404, 0.404)
+texture_normal = ExtResource("2_v1fph")
+
+[node name="Ring" type="TextureButton" parent="."]
+offset_left = 66.0
+offset_top = 570.0
+offset_right = 316.0
+offset_bottom = 820.0
+scale = Vector2(0.404, 0.404)
+texture_normal = ExtResource("2_v1fph")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SearchButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 330.0
+offset_top = 386.0
+offset_right = 842.0
+offset_bottom = 898.0
+scale = Vector2(0.159289, 0.159289)
+mouse_default_cursor_shape = 2
+button_mask = 3
+texture_normal = ExtResource("3_mojkj")
+script = ExtResource("4_xnhtk")
+
+[node name="GoldenCircleEffect" type="Sprite2D" parent="CanvasLayer/SearchButton"]
+position = Vector2(345.284, 182.059)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("4_ej1ai")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_tktan")
+}
+
+[connection signal="pressed" from="CanvasLayer/SearchButton" to="CanvasLayer/SearchButton" method="_on_pressed"]

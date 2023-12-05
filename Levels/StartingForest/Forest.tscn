@@ -1,10 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqgf2ujr7gcy"]
+[gd_scene load_steps=6 format=3 uid="uid://cqgf2ujr7gcy"]
 
 [ext_resource type="Texture2D" uid="uid://b1t5npx3d8gpm" path="res://Levels/StartingForest/forest-bg.jpg" id="1_feggf"]
+[ext_resource type="Script" path="res://Levels/StartingForest/Forest.gd" id="1_iybxb"]
+[ext_resource type="PackedScene" uid="uid://cvsckot47cney" path="res://UI/Search/search_button.tscn" id="4_b8ka5"]
+[ext_resource type="PackedScene" uid="uid://8op1u74kho5" path="res://Items/Mushrooms/Mushroom.tscn" id="4_wcs1c"]
+[ext_resource type="PackedScene" uid="uid://bfin66wim7kne" path="res://Items/Herbs/Herb.tscn" id="5_4v5ko"]
 
-[node name="Root" type="Node2D"]
+[node name="Forest" type="Node2D"]
+script = ExtResource("1_iybxb")
 
 [node name="Forest-bg" type="Sprite2D" parent="."]
 scale = Vector2(0.673675, 0.673675)
 texture = ExtResource("1_feggf")
 centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SearchButton" parent="CanvasLayer" instance=ExtResource("4_b8ka5")]
+unique_name_in_owner = true
+offset_left = 1072.0
+offset_top = 14.0
+offset_right = 1584.0
+offset_bottom = 526.0
+
+[node name="Mushroom" parent="." instance=ExtResource("4_wcs1c")]
+position = Vector2(130, 595)
+
+[node name="Mushroom2" parent="." instance=ExtResource("4_wcs1c")]
+position = Vector2(228, 592)
+
+[node name="Herb" parent="." instance=ExtResource("5_4v5ko")]
+position = Vector2(318, 592)
+
+[node name="Herb2" parent="." instance=ExtResource("5_4v5ko")]
+position = Vector2(394, 593)
+
+[node name="Herb3" parent="." instance=ExtResource("5_4v5ko")]
+position = Vector2(474, 593)
