@@ -27,11 +27,10 @@ _data = {
 }
 
 [node name="SearchButton" type="TextureButton"]
-offset_left = 330.0
-offset_top = 386.0
-offset_right = 842.0
-offset_bottom = 898.0
-scale = Vector2(0.159289, 0.159289)
+texture_filter = 5
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.165294, 0.165294)
 mouse_default_cursor_shape = 2
 toggle_mode = true
 action_mode = 0
@@ -39,6 +38,7 @@ texture_normal = ExtResource("1_yag3g")
 script = ExtResource("2_ak47r")
 
 [node name="CircleArrows" type="TextureRect" parent="."]
+texture_filter = 5
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.659

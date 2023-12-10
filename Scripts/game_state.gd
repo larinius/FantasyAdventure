@@ -5,6 +5,7 @@ const Item = preload("res://Scripts/game_item.gd")
 var world_items : Array = []
 
 var is_searching := false
+var active_skill : StringName = ""
 
 func _ready():
 	test_game_items()

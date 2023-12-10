@@ -27,7 +27,7 @@ _data = {
 radius = 463.47
 
 [node name="Effect" type="Sprite2D"]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.01, 0.01)
 texture = ExtResource("1_2lynp")
 script = ExtResource("2_bo4gg")
 
