@@ -7,11 +7,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
 func _on_area_2d_area_entered(area):
-	
+
 	var monster = area.get_parent()
 	GameController.on_hit(monster, "Fireball")

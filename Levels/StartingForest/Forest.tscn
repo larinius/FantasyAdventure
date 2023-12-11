@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqgf2ujr7gcy"]
+[gd_scene load_steps=12 format=3 uid="uid://cqgf2ujr7gcy"]
 
 [ext_resource type="Texture2D" uid="uid://b1t5npx3d8gpm" path="res://Levels/StartingForest/forest-bg.jpg" id="1_feggf"]
 [ext_resource type="Script" path="res://Levels/StartingForest/Forest.gd" id="1_iybxb"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c2qifdpkb2vm5" path="res://Items/Skull/Skull.tscn" id="6_7k8fv"]
 [ext_resource type="PackedScene" uid="uid://bjyftf1aooxnj" path="res://Monsters/Slime/Slime.tscn" id="9_2nvn4"]
 [ext_resource type="Texture2D" uid="uid://cdxk14al31x4j" path="res://Skills/Sword/sword_1.png" id="10_2k7iy"]
+[ext_resource type="PackedScene" uid="uid://dtx0jt5c7opk" path="res://Characters/Player/Player.tscn" id="10_opyq2"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fjw44"]
 load_path = "res://.godot/imported/eye_search_512.png-7ef0e4e399b41cda35b12341dc236e0b.ctex"
@@ -72,3 +73,5 @@ position = Vector2(546, 238)
 [node name="Slime" parent="." instance=ExtResource("9_2nvn4")]
 position = Vector2(508, 548)
 scale = Vector2(1.8405, 1.8405)
+
+[node name="Player" parent="." instance=ExtResource("10_opyq2")]

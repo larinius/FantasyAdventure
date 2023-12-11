@@ -1,8 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjyftf1aooxnj"]
+[gd_scene load_steps=16 format=3 uid="uid://bjyftf1aooxnj"]
 
 [ext_resource type="Texture2D" uid="uid://dh8n2wjovktlx" path="res://Monsters/Slime/Slime_final.png" id="1_jan5w"]
 [ext_resource type="Script" path="res://Monsters/Slime/Slime.gd" id="1_t25ed"]
+[ext_resource type="Script" path="res://Monsters/monster_fsm.gd" id="2_4i78f"]
 [ext_resource type="Shader" path="res://Shaders/2d_shadow.gdshader" id="2_gufng"]
+[ext_resource type="PackedScene" uid="uid://dec75ygdm7240" path="res://Monsters/MonsterStats.tscn" id="3_5dqk3"]
+[ext_resource type="Texture2D" uid="uid://cyeeeveg0mewa" path="res://Monsters/Slime/Slime_dead_1.png" id="6_7gew1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oeog7"]
+bg_color = Color(0.945098, 0.4, 0.380392, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nacye"]
 shader = ExtResource("2_gufng")
@@ -15,7 +21,6 @@ radius = 12.123
 
 [sub_resource type="Animation" id="Animation_a83r6"]
 resource_name = "Attack"
-loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -67,6 +72,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-6, -30), Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D_dead:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_4a2al"]
 resource_name = "Idle"
@@ -84,25 +113,136 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0.169949, 0.169949), Vector2(0.185, 0.165), Vector2(0.169949, 0.169949)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7msf7"]
+resource_name = "Damage"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(0.594604, 0.574349, 0.307786, 0.554785, 2.21914),
+"update": 0,
+"values": [Vector2(0.17, 0.17), Vector2(0.16, 0.16), Vector2(0.18, 0.18), Vector2(0.16, 0.16), Vector2(0.16, 0.16)]
+}
+
+[sub_resource type="Animation" id="Animation_4y5iq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.15, 0.15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D_dead:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rncjy"]
 _data = {
 "Attack": SubResource("Animation_a83r6"),
+"Damage": SubResource("Animation_7msf7"),
 "Die": SubResource("Animation_dgwl1"),
-"Idle": SubResource("Animation_4a2al")
+"Idle": SubResource("Animation_4a2al"),
+"RESET": SubResource("Animation_4y5iq")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oeog7"]
-bg_color = Color(0.945098, 0.4, 0.380392, 1)
 
 [node name="Slime" type="Node2D"]
 script = ExtResource("1_t25ed")
 
+[node name="AI" type="Node" parent="."]
+script = ExtResource("2_4i78f")
+
+[node name="Stats" parent="AI" instance=ExtResource("3_5dqk3")]
+
+[node name="InfoBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(150, 30)
+offset_left = -69.0
+offset_right = 81.0
+offset_bottom = 54.0
+size_flags_horizontal = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Title" type="Label" parent="InfoBox/HBoxContainer"]
+layout_mode = 2
+text = "Slime"
+
+[node name="Level" type="Label" parent="InfoBox/HBoxContainer"]
+layout_mode = 2
+text = "3 Level"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InfoBox"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="InfoBox/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_oeog7")
+value = 70.0
+show_percentage = false
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_nacye")
 position = Vector2(-6, -30)
-scale = Vector2(0.169949, 0.169949)
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_jan5w")
+
+[node name="Sprite2D_dead" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_nacye")
+position = Vector2(-2, -22)
+scale = Vector2(0.120039, 0.120039)
+texture = ExtResource("6_7gew1")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -116,35 +256,3 @@ libraries = {
 "": SubResource("AnimationLibrary_rncjy")
 }
 autoplay = "Idle"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(150, 30)
-offset_left = -69.0
-offset_right = 81.0
-offset_bottom = 54.0
-size_flags_horizontal = 6
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Title" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Slime"
-
-[node name="Level" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "3 Level"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 5)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_styles/fill = SubResource("StyleBoxFlat_oeog7")
-value = 70.0
-show_percentage = false

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq62l830nbylf"]
+
+[ext_resource type="Script" path="res://Monsters/monster_fsm.gd" id="1_bxg64"]
+
+[node name="MonsterFsm" type="Node"]
+script = ExtResource("1_bxg64")
