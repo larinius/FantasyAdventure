@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://dopg4vh341dy4"]
+
+[ext_resource type="Shader" path="res://Abilities/Fireball/FireballEffect.gdshader" id="1_rjvtd"]
+[ext_resource type="Script" path="res://Abilities/Fireball/fireball_effect.gd" id="1_twkxo"]
+[ext_resource type="Texture2D" uid="uid://cu7g82gbe3x3x" path="res://addons/kenney_particle_pack/circle_05.png" id="2_57hfi"]
+[ext_resource type="SpriteFrames" uid="uid://b14boykaib0yh" path="res://Abilities/Fireball/FireballEffectFrames.tres" id="4_h2bq0"]
+[ext_resource type="Script" path="res://Abilities/Fireball/animated_sprite2D.gd" id="5_4acwx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o3qtv"]
+shader = ExtResource("1_rjvtd")
+shader_parameter/brighter_color = Color(1, 0.8, 0, 1)
+shader_parameter/middle_color = Color(1, 0.56, 0, 1)
+shader_parameter/darker_color = Color(0.639216, 0.2, 0.0509804, 1)
+shader_parameter/spread = 0.443
+shader_parameter/noise_tex = ExtResource("2_57hfi")
+shader_parameter/gradient_tex = ExtResource("2_57hfi")
+
+[sub_resource type="Animation" id="Animation_yof35"]
+resource_name = "Explosion"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Explosion"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0999201, 0.19984, 0.29976),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_trsvd"]
+_data = {
+"Explosion": SubResource("Animation_yof35")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fcpss"]
+radius = 36.0
+
+[node name="FireballEffect" type="Node2D"]
+script = ExtResource("1_twkxo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_o3qtv")
+scale = Vector2(0.296615, 0.296615)
+sprite_frames = ExtResource("4_h2bq0")
+animation = &"Explosion"
+frame = 1
+script = ExtResource("5_4acwx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_trsvd")
+}
+autoplay = "Explosion"
+playback_default_blend_time = 0.1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fcpss")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

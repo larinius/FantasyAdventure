@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://nwpneltpmcxg"]
+
+[ext_resource type="Script" path="res://Abilities/Icicle/ice_needle.gd" id="1_jbdcw"]
+[ext_resource type="Texture2D" uid="uid://b6yp1jxqrm376" path="res://Abilities/Icicle/Icicle_icon_2.png" id="2_ymub3"]
+
+[node name="IceNeedle" type="Node"]
+script = ExtResource("1_jbdcw")
+icon = ExtResource("2_ymub3")

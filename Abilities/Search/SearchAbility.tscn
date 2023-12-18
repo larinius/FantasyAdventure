@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://qhf8dhb0fir5"]
+
+[ext_resource type="Script" path="res://Abilities/Search/SearchAbility.gd" id="1_tiyup"]
+
+[node name="SearchAbility" type="Node"]
+script = ExtResource("1_tiyup")

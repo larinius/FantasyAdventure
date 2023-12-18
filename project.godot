@@ -26,7 +26,11 @@ GameController="*res://Scripts/game_controller.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom_font="res://Assets/Fonts/MedievalSharp-BoldOblique.ttf"
 
 [rendering]
 

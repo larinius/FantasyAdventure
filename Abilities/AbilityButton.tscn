@@ -1,0 +1,137 @@
+[gd_scene load_steps=9 format=3 uid="uid://8h2jprkpepxx"]
+
+[ext_resource type="Script" path="res://Abilities/ability_button.gd" id="1_6x8u1"]
+[ext_resource type="Material" uid="uid://cvrjcnthm6ju2" path="res://Abilities/AbilityButton.material" id="2_x77md"]
+[ext_resource type="Texture2D" uid="uid://d3x1b51x1shlt" path="res://addons/kenney_particle_pack/circle_01.png" id="3_yixnd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vy71v"]
+load_path = "res://.godot/imported/default.png-1149bcf5f4f8ffd13bf92321127b7dce.ctex"
+
+[sub_resource type="Animation" id="Animation_3tmvv"]
+resource_name = "Active"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IconButton:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.517633, 0.68302, 0.659754),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.02, 1.02), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IconButton/Border:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rcbch"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IconButton/Border:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_chard"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IconButton/Border:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m66ib"]
+_data = {
+"Active": SubResource("Animation_3tmvv"),
+"Idle": SubResource("Animation_rcbch"),
+"RESET": SubResource("Animation_chard")
+}
+
+[node name="AbilityButton" type="Control" groups=["Buttons"]]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.194194, 0.194194)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_6x8u1")
+skill_texture = SubResource("CompressedTexture2D_vy71v")
+
+[node name="IconButton" type="TextureButton" parent="."]
+material = ExtResource("2_x77md")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 512.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("CompressedTexture2D_vy71v")
+ignore_texture_size = true
+
+[node name="Border" type="TextureRect" parent="IconButton"]
+modulate = Color(0.933333, 0.745098, 0.470588, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -431.083
+offset_top = -436.232
+offset_right = 567.917
+offset_bottom = 562.768
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.868833, 0.868833)
+texture = ExtResource("3_yixnd")
+expand_mode = 3
+
+[node name="ProgressCircle" type="TextureProgressBar" parent="IconButton"]
+visible = false
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(1.65999, 1.65999)
+pivot_offset = Vector2(256, 256)
+value = 100.0
+fill_mode = 4
+texture_progress = ExtResource("3_yixnd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m66ib")
+}
+
+[connection signal="button_down" from="IconButton" to="." method="_on_icon_button_button_down"]
+[connection signal="mouse_entered" from="IconButton" to="." method="_on_icon_button_mouse_entered"]
+[connection signal="mouse_exited" from="IconButton" to="." method="_on_icon_button_mouse_exited"]
+[connection signal="pressed" from="IconButton" to="." method="_on_icon_button_pressed"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bie8gp26tggjk"]
+
+[ext_resource type="Script" path="res://Abilities/Fireball/firebal_ability.gd" id="1_odvpp"]
+[ext_resource type="Texture2D" uid="uid://baoa7s043qr1b" path="res://Abilities/Fireball/fireball_512.png" id="2_ib0qi"]
+
+[node name="FirebalAbility" type="Node"]
+script = ExtResource("1_odvpp")
+icon = ExtResource("2_ib0qi")
+title = &"Fireball"
+level = 1
+required_mp = 5
+required_ap = 5
+cooldown = 5.0
+description = "A basic fire-based attack in the arsenal of novice mages, the Fireball is effective against common monsters, utilizing the power of flames to overcome typical adversaries. Unfortunately, its efficacy wanes when faced with stone monsters and ghosts, requiring mages to strategize and adapt their magical repertoire in diverse encounters."

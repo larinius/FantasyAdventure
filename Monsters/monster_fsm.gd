@@ -15,6 +15,7 @@ var current_state : MonsterState = MonsterState.IDLE
 var timer : Timer
 var stats : MonsterStats
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var bash = BashAttack.new()
@@ -66,7 +67,7 @@ func on_state_enter(state : MonsterState) -> void:
 
 
 func update_ai() -> void:
-	#print("Updating AI ", action_points, " ap")
+
 	action_points += 1
 
 	match current_state:
@@ -108,8 +109,11 @@ func use_ability(ability : MonsterAbility):
 	ability.perform(get_parent(), target)
 
 func take_damage(amount : float):
-	transition_to_state(MonsterState.DAMAGE)
-	on_damage(amount)
+	if current_state != MonsterState.DEAD:
+		transition_to_state(MonsterState.DAMAGE)
+		on_damage(amount)
+	else:
+		print(get_parent().name, " already dead!")
 
 func on_damage(amount : float):
 	print("Got damage ", amount)
@@ -119,17 +123,26 @@ func on_damage(amount : float):
 	else:
 		anim.stop()
 		anim.play("Damage")
-	stats.hp -= amount
-	if stats.hp <= 0:
+	stats.current_hp -= amount
+	stats.update_info()
+	if stats.current_hp <= 0:
 		transition_to_state(MonsterState.DEAD)
 	else:
 		transition_to_state(MonsterState.IDLE)
 
 
 func on_die():
+	GameController.disconnect("take_damage", take_damage)
 	var anim = get_parent().get_node("AnimationPlayer")
 	if not anim.is_playing():
 		anim.play("Die")
 	else:
 		anim.stop()
 		anim.play("Die")
+
+func on_atack():
+	print("Attaking")
+	GameController.use_skill(get_parent().current_ability, get_parent().current_target)
+
+
+

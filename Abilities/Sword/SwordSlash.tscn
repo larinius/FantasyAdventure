@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://4bk6hu2hok52"]
+
+[ext_resource type="Script" path="res://Abilities/Sword/sword_slash.gd" id="1_2dtfg"]
+[ext_resource type="Texture2D" uid="uid://cdxk14al31x4j" path="res://Abilities/Sword/sword_1.png" id="2_653kq"]
+
+[node name="SwordSlash" type="Node"]
+script = ExtResource("1_2dtfg")
+icon = ExtResource("2_653kq")
+title = &"Sword Slash"
+level = 1
+required_ap = 10
+cooldown = 5.0
+description = "A fundamental sword skill for beginners, the Sword Slash delivers a strong diagonal attack. Ideal for combating common monsters and bandits, it showcases effectiveness against regular foes. However, its impact diminishes against heavily armored opponents, stone-type monsters, skeletons, and elusive ghosts."
