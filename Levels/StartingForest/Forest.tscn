@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://cqgf2ujr7gcy"]
+[gd_scene load_steps=21 format=3 uid="uid://cqgf2ujr7gcy"]
 
-[ext_resource type="Texture2D" uid="uid://b1t5npx3d8gpm" path="res://Levels/StartingForest/forest-bg.jpg" id="1_feggf"]
 [ext_resource type="Script" path="res://Levels/StartingForest/forest.gd" id="1_iybxb"]
 [ext_resource type="Texture2D" uid="uid://btadenuok61el" path="res://Assets/Icons/person_icon.png" id="3_i6uyb"]
+[ext_resource type="Texture2D" uid="uid://dvfvtr33tes7v" path="res://Levels/StartingForest/forest-bg_2.png" id="3_q4uh1"]
 [ext_resource type="Script" path="res://Levels/StartingForest/player_info_panel.gd" id="3_xtrbi"]
 [ext_resource type="PackedScene" uid="uid://8h2jprkpepxx" path="res://Abilities/AbilityButton.tscn" id="4_eed5x"]
 [ext_resource type="PackedScene" uid="uid://8op1u74kho5" path="res://Items/Mushrooms/Mushroom.tscn" id="4_wcs1c"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://bjyftf1aooxnj" path="res://Monsters/Slime/Slime.tscn" id="9_2nvn4"]
 [ext_resource type="Texture2D" uid="uid://cdxk14al31x4j" path="res://Abilities/Sword/sword_1.png" id="10_2k7iy"]
 [ext_resource type="PackedScene" uid="uid://dtx0jt5c7opk" path="res://Characters/Player/Player.tscn" id="10_opyq2"]
+[ext_resource type="PackedScene" uid="uid://crpjw40byd2sh" path="res://UI/InventoryButton.tscn" id="15_k8dj7"]
+[ext_resource type="PackedScene" uid="uid://cpx7hy411503k" path="res://UI/MapButton.tscn" id="15_w7eey"]
+[ext_resource type="Texture2D" uid="uid://cjfrww3yn0wiv" path="res://UI/close icon 6.png" id="17_x5y2n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65vyt"]
 bg_color = Color(0.945098, 0.4, 0.392157, 1)
@@ -27,11 +30,35 @@ load_path = "res://.godot/imported/eye_search_512.png-7ef0e4e399b41cda35b12341dc
 [node name="Forest" type="Node2D"]
 script = ExtResource("1_iybxb")
 
+[node name="Player" parent="." instance=ExtResource("10_opyq2")]
+
 [node name="Forest-bg" type="Sprite2D" parent="."]
-position = Vector2(-118, -10)
-scale = Vector2(0.761426, 0.761426)
-texture = ExtResource("1_feggf")
+position = Vector2(-108, -10)
+scale = Vector2(0.799685, 0.799685)
+texture = ExtResource("3_q4uh1")
 centered = false
+
+[node name="Mushroom" parent="." instance=ExtResource("4_wcs1c")]
+position = Vector2(135, 241)
+
+[node name="Mushroom2" parent="." instance=ExtResource("4_wcs1c")]
+position = Vector2(233, 238)
+
+[node name="Herb" parent="." instance=ExtResource("5_4v5ko")]
+position = Vector2(323, 238)
+
+[node name="Herb2" parent="." instance=ExtResource("5_4v5ko")]
+position = Vector2(399, 239)
+
+[node name="Herb3" parent="." instance=ExtResource("5_4v5ko")]
+position = Vector2(479, 239)
+
+[node name="Skull" parent="." instance=ExtResource("6_7k8fv")]
+position = Vector2(546, 238)
+
+[node name="Slime" parent="." instance=ExtResource("9_2nvn4")]
+position = Vector2(508, 548)
+scale = Vector2(1.8405, 1.8405)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -124,33 +151,33 @@ skill_name = "IceNeedle"
 
 [node name="Inventory" type="TextureRect" parent="CanvasLayer"]
 visible = false
-offset_left = 698.0
-offset_top = 101.0
-offset_right = 1485.0
-offset_bottom = 892.0
+offset_left = 735.0
+offset_top = 113.0
+offset_right = 1522.0
+offset_bottom = 904.0
 scale = Vector2(0.685929, 0.685929)
 texture = ExtResource("7_0o24n")
 
-[node name="Mushroom" parent="." instance=ExtResource("4_wcs1c")]
-position = Vector2(135, 241)
+[node name="InventoryButton" parent="CanvasLayer" instance=ExtResource("15_k8dj7")]
+offset_left = 1027.0
+offset_top = 4.0
+offset_right = 1127.0
+offset_bottom = 104.0
 
-[node name="Mushroom2" parent="." instance=ExtResource("4_wcs1c")]
-position = Vector2(233, 238)
+[node name="MapButton" parent="CanvasLayer" instance=ExtResource("15_w7eey")]
+offset_left = 1175.0
+offset_top = 3.0
+offset_right = 1275.0
+offset_bottom = 103.0
 
-[node name="Herb" parent="." instance=ExtResource("5_4v5ko")]
-position = Vector2(323, 238)
-
-[node name="Herb2" parent="." instance=ExtResource("5_4v5ko")]
-position = Vector2(399, 239)
-
-[node name="Herb3" parent="." instance=ExtResource("5_4v5ko")]
-position = Vector2(479, 239)
-
-[node name="Skull" parent="." instance=ExtResource("6_7k8fv")]
-position = Vector2(546, 238)
-
-[node name="Slime" parent="." instance=ExtResource("9_2nvn4")]
-position = Vector2(508, 548)
-scale = Vector2(1.8405, 1.8405)
-
-[node name="Player" parent="." instance=ExtResource("10_opyq2")]
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+offset_left = 726.0
+offset_top = 106.0
+offset_right = 776.0
+offset_bottom = 156.0
+size_flags_horizontal = 0
+texture_normal = ExtResource("17_x5y2n")
+ignore_texture_size = true
+stretch_mode = 5

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpx7hy411503k"]
+
+[ext_resource type="Script" path="res://UI/map_button.gd" id="1_jppna"]
+[ext_resource type="Texture2D" uid="uid://dn2wf37aurtrc" path="res://UI/compas_icon.png" id="2_qkrp4"]
+
+[node name="MapButton" type="TextureButton"]
+offset_right = 100.0
+offset_bottom = 100.0
+texture_normal = ExtResource("2_qkrp4")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("1_jppna")

@@ -15,7 +15,7 @@ var is_active : bool = false
 var effect : Node2D
 var effect_scene : PackedScene
 
-signal ability_used()
+signal ability_used() # For cooldown progress circle on ability button
 
 func _ready():
 	pass # Replace with function body.
@@ -28,9 +28,8 @@ func is_usable() -> bool:
 	var usable = cooldown_ready and is_active
 	return usable
 
-func use(point):
+func use(point : Vector2) -> void:
 	last_used_time = Time.get_unix_time_from_system()
-	print("Ability, using ", title)
 
 	if effect_scene != null:
 		var effect = effect_scene.instantiate()

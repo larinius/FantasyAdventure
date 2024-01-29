@@ -6,7 +6,7 @@ class_name MonsterStats extends Node
 var current_hp : int = 10
 var current_mp : int = 0
 @export var level : int = 1
-@export var str : int = 5
+@export var power : int = 5
 @export var evasion : int = 10
 @export var pdef : int = 0
 

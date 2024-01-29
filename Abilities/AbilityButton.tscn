@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://8h2jprkpepxx"]
+[gd_scene load_steps=9 format=3 uid="uid://8h2jprkpepxx"]
 
 [ext_resource type="Script" path="res://Abilities/ability_button.gd" id="1_6x8u1"]
 [ext_resource type="Material" uid="uid://cvrjcnthm6ju2" path="res://Abilities/AbilityButton.material" id="2_x77md"]
 [ext_resource type="Texture2D" uid="uid://d3x1b51x1shlt" path="res://addons/kenney_particle_pack/circle_01.png" id="3_yixnd"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5r6ur"]
-load_path = "res://.godot/imported/default.png-1149bcf5f4f8ffd13bf92321127b7dce.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vy71v"]
 load_path = "res://.godot/imported/default.png-1149bcf5f4f8ffd13bf92321127b7dce.ctex"
 
 [sub_resource type="Animation" id="Animation_3tmvv"]
@@ -97,7 +94,7 @@ offset_right = 512.0
 offset_bottom = 512.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = SubResource("CompressedTexture2D_vy71v")
+texture_normal = SubResource("CompressedTexture2D_5r6ur")
 ignore_texture_size = true
 
 [node name="Border" type="TextureRect" parent="IconButton"]
